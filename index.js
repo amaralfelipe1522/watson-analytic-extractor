@@ -8,6 +8,8 @@ const tunnel = require("tunnel");
 
 let days = process.env.DAY || 1;
 
+const fileName = moment().subtract(days, "day").format("YYYY-MM-DD_23_59_59");
+
 const now = moment().subtract(days, "day");
 const startDate = now.startOf("day").toISOString();
 const endDate = now.endOf("day").toISOString();
@@ -187,6 +189,9 @@ function sleep(ms) {
       console.log(`logs do dia ${moment().subtract(days, "day")}`);
       console.log(`logs enviados apos ${tentativas} com erro`);
       i++;
+      console.log(
+        `\nArquivo ${fileName}.csv gerado com sucesso.\nLocal do arquivo gerado: ${__dirname}.`
+      );
     } else {
       console.log(
         "houve um erro, quantidade de erros: ",
