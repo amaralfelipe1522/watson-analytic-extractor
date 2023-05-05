@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "ibm-watson": "^8.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "tunnel": "^0.0.6"
+  }
+}
