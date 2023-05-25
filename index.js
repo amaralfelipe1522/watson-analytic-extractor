@@ -16,7 +16,7 @@ const endDate = now.endOf("day").toISOString();
 
 const logs = async (cursor) => {
   if (process.env.HOST != "NOT_USED" || process.env.PORT != "NOT_USED") {
-    console.log("COM PROXY");
+    console.log("Usando HOST e/ou PORT na extração");
 
     const httpsAgent = tunnel.httpOverHttp({
       proxy: {
@@ -37,7 +37,9 @@ const logs = async (cursor) => {
       serviceUrl: process.env.WATSON_SERVICE_URL,
     });
 
-    console.log(startDate, "\n", endDate);
+    console.log(
+      `Logs sendo extraídos entre o período de ${startDate} até ${endDate}`
+    );
 
     const rawLog = await assistant.listLogs({
       assistantId: process.env.WATSON_ASSISTANT_ID,
@@ -58,7 +60,9 @@ const logs = async (cursor) => {
       serviceUrl: process.env.WATSON_SERVICE_URL,
     });
 
-    console.log(startDate, "\n", endDate);
+    console.log(
+      `Logs sendo extraídos entre o período de ${startDate} até ${endDate}`
+    );
     const rawLog = await assistant.listLogs({
       assistantId: process.env.WATSON_ASSISTANT_ID,
       cursor: cursor || "",
@@ -186,17 +190,15 @@ function sleep(ms) {
 
   for (i = 0; i < 1; ) {
     if (users.sucess == true) {
-      console.log(`logs do dia ${moment().subtract(days, "day")}`);
-      console.log(`logs enviados apos ${tentativas} com erro`);
+      console.log(`Logs do dia ${moment().subtract(days, "day")}`);
+      console.log(`Logs enviados após ${tentativas} erro(s)`);
       i++;
-      console.log(
-        `\nArquivo ${fileName}.csv gerado com sucesso.\nLocal do arquivo gerado: ${__dirname}.`
-      );
+      console.log(`\n** Arquivo ${fileName}.csv gerado com sucesso. **`);
     } else {
       console.log(
-        "houve um erro, quantidade de erros: ",
+        "Houve um erro, quantidade de erros: ",
         tentativas++,
-        "o erro foi: ",
+        "O erro foi: ",
         users.error
       );
       await sleep(12000);
